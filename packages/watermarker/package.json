@@ -1,6 +1,6 @@
 {
-  "name": "@wendy/watermarker",
-  "version": "0.1.2",
+  "name": "@wendyjs/watermarker",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {

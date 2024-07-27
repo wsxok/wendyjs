@@ -1,8 +1,6 @@
 {
-  "name": "@wendy",
-  "version": "0.1.1",
+  "name": "@wendyjs/wendy-monorepo",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,5 +9,8 @@
   "license": "ISC",
   "devDependencies": {
     "@changesets/cli": "^2.27.7"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
