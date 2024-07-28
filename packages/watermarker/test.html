@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>My Parcel app</h1>
+
+<script type="module">
+    import {Watermark} from './src/index.ts'
+    const instance = new Watermark({content:['wangshixiao','13998801085']})
+    console.log(instance)
+    instance.renderWatermark()
+    const handlec = ()=>{
+        alert(1)
+    }
+</script>
+<button onclick="handlec()">1111</button>
+</body>
+</html>

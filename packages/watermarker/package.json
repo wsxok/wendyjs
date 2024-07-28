@@ -2,14 +2,22 @@
   "name": "@wendyjs/watermarker",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "source": "src/index.ts",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel test.html",
+    "watch": "parcel watch",
+    "build": "parcel build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["watermarker","watermarker.js","watermarkerjs"],
+  "author": "shawnwang",
+  "license": "MIT",
   "devDependencies": {
     "parcel": "^2.12.0"
+  },
+  "dependencies": {
+    "radash": "^12.1.0"
   }
 }
