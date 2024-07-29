@@ -4,11 +4,13 @@
   "version": "0.0.1",
   "description": "This is a framework-agnostic package that provides a Watermark class for managing watermarks on HTML elements. It includes features such as automatic re-rendering when mutations occur, customizable watermark styles",
   "source": "src/index.ts",
-  "main": "dist/wendyjs-watermark.cjs.js",
-  "module": "dist/wendyjs-watermark.esm.js",
+  "main": "dist/wendyjs-watermark.cjs",
+  "module": "dist/wendyjs-watermark.mjs",
   "types": "dist/types.d.ts",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "parcel test.html",
     "watch": "parcel watch",
@@ -31,6 +33,7 @@
   "homepage": "https://github.com/wsxok/wendyjs/tree/main/packages/watermarker#readme",
   "license": "MIT",
   "dependencies": {
+    "es-toolkit": "^1.13.1",
     "radash": "^12.1.0"
   },
   "devDependencies": {

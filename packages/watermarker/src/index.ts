@@ -1,7 +1,7 @@
 import {getMarkSize, getMarkStyle, getPixelRatio, getStyleStr, reRendering} from "./utils";
 import useClips from "./useClips";
 import {WatermarkConfigs, WatermarkInfo,FontStyle} from "./type";
-import { debounce } from 'radash'
+import { debounce } from 'es-toolkit'
 export class Watermark{
     watermarkMap:Map<HTMLElement, HTMLDivElement>
     configs:WatermarkConfigs
@@ -17,7 +17,7 @@ export class Watermark{
              * The antd content layer zIndex is basically below 10
              * https://github.com/ant-design/ant-design/blob/6192403b2ce517c017f9e58a32d58774921c10cd/components/style/themes/default.less#L335
              */
-            zIndex : 9,
+            zIndex : 99999,
             rotate : -22,
             font : {},
             gap : [100, 100],
@@ -26,7 +26,7 @@ export class Watermark{
         }
         this.container = container|| document.body
         this.watermarkMap = new Map()
-        this.debounced  = debounce( {delay:500},this.renderWatermark.bind(this))
+        this.debounced  = debounce( this.renderWatermark.bind(this),500)
         this.observer = new MutationObserver(this.onMutate.bind(this));
     }
 
