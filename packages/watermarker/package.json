@@ -1,23 +1,43 @@
 {
   "name": "@wendyjs/watermarker",
+  "private": false,
   "version": "0.0.1",
-  "description": "",
+  "description": "This is a framework-agnostic package that provides a Watermark class for managing watermarks on HTML elements. It includes features such as automatic re-rendering when mutations occur, customizable watermark styles",
   "source": "src/index.ts",
-  "main": "dist/main.js",
-  "module": "dist/module.js",
+  "main": "dist/wendyjs-watermark.cjs.js",
+  "module": "dist/wendyjs-watermark.esm.js",
   "types": "dist/types.d.ts",
+  "type": "module",
+  "files": ["dist"],
   "scripts": {
     "start": "parcel test.html",
     "watch": "parcel watch",
-    "build": "parcel build"
+    "build": "rollup -c rollup.config.js  --environment BUILD:production"
   },
-  "keywords": ["watermarker","watermarker.js","watermarkerjs"],
-  "author": "shawnwang",
+  "keywords": [
+    "watermarker",
+    "watermarker.js",
+    "watermarkerjs"
+  ],
+  "author": {
+    "name": "shawnwang",
+    "email": "wsxok15@163.com",
+    "url": "https://github.com/wsxok"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wsxok/wendyjs/tree/main/packages/watermarker"
+  },
+  "homepage": "https://github.com/wsxok/wendyjs/tree/main/packages/watermarker#readme",
   "license": "MIT",
-  "devDependencies": {
-    "parcel": "^2.12.0"
-  },
   "dependencies": {
     "radash": "^12.1.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.19.1",
+    "rollup-plugin-delete": "^2.0.0"
   }
 }

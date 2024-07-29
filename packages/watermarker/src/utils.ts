@@ -36,14 +36,11 @@ export const reRendering = (mutation: MutationRecord, isWatermarkEle: (ele: Node
 export function getMarkSize  (ctx: CanvasRenderingContext2D,configs:WatermarkConfigs)  {
   let defaultWidth = 120;
   let defaultHeight = 64;
-  const {image,font,width,height,content} = configs
-
+  const {image,font = {},width,height,content} = configs
+  // @ts-ignore
   const {
-    fontSize = '16',
-    fontWeight = 'normal',
-    fontStyle = 'normal',
+    fontSize = 14,
     fontFamily = 'sans-serif',
-    textAlign = 'center',
   } = font;
   if (!image && ctx.measureText) {
     ctx.font = `${Number(fontSize)}px ${fontFamily}`;
@@ -58,7 +55,7 @@ export function getMarkSize  (ctx: CanvasRenderingContext2D,configs:WatermarkCon
         Math.ceil(Math.max(...sizes.map((size) => size[1]))) * contents.length +
         (contents.length - 1) * FontGap;
   }
-  return [width ?? defaultWidth, height ?? defaultHeight] as const;
+  return [width || defaultWidth, height || defaultHeight] as const;
 };
 export function getMarkStyle(configs:WatermarkConfigs){
   const mergedMarkStyle:any = {
@@ -79,8 +76,8 @@ export function getMarkStyle(configs:WatermarkConfigs){
   const [gapX , gapY ] = gap;
   const gapXCenter = gapX / 2;
   const gapYCenter = gapY / 2;
-  const offsetLeft = offset?.[0] ?? gapXCenter;
-  const offsetTop = offset?.[1] ?? gapYCenter;
+  const offsetLeft = (offset?offset[0]:0) || gapXCenter;
+  const offsetTop = (offset?offset[1]:0) || gapYCenter;
   /** Calculate the style of the offset */
   let positionLeft = offsetLeft - gapXCenter;
   let positionTop = offsetTop - gapYCenter;

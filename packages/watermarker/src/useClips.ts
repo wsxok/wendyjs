@@ -29,7 +29,7 @@ function prepareCanvas(
  * This is a lazy hook function since SSR no need this
  */
 export default function useClips() {
-  // Get single clips
+
   function getClips(
     content: NonNullable<WatermarkConfigs['content']> | HTMLImageElement,
     rotate: number,
@@ -58,9 +58,9 @@ export default function useClips() {
       const contents = Array.isArray(content) ? content : [content];
 
 
-      contents?.forEach((item, index) => {
-        console.log(contentWidth / 2, index * (mergedFontSize + FontGap * ratio))
-        ctx.fillText(item ?? '', contentWidth / 2, index * (mergedFontSize + FontGap * ratio));
+      contents && contents.forEach((item, index) => {
+        // console.log(contentWidth / 2, index * (mergedFontSize + FontGap * ratio))
+        ctx.fillText(item || '', contentWidth / 2, index * (mergedFontSize + FontGap * ratio));
       });
       // 设置背景颜色
       ctx.fillStyle = 'rgba(0,0,0,0)'; // 可以是任何CSS颜色值
@@ -68,7 +68,7 @@ export default function useClips() {
 // 绘制整个Canvas的背景
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
-    console.log(canvas.toDataURL())
+    // console.log(canvas.toDataURL())
     // ==================== Rotate ====================
     const angle = (Math.PI / 180) * Number(rotate);
     const maxSize = Math.max(width, height);

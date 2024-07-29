@@ -1,15 +1,17 @@
 import {getMarkSize, getMarkStyle, getPixelRatio, getStyleStr, reRendering} from "./utils";
 import useClips from "./useClips";
-import {WatermarkConfigs, WatermarkInfo} from "./type";
-import { debounce } from 'radash/dist/cjs/index.cjs'
+import {WatermarkConfigs, WatermarkInfo,FontStyle} from "./type";
+import { debounce } from 'radash'
 export class Watermark{
     watermarkMap:Map<HTMLElement, HTMLDivElement>
     configs:WatermarkConfigs
     getClips = useClips();
-    watermarkInfo:WatermarkInfo
+    watermarkInfo:WatermarkInfo = ['',0]
     observer:MutationObserver
     container?:HTMLElement
-    constructor(configs:WatermarkConfigs) {
+    private static instance:Watermark
+    private debounced:Function
+    private constructor(configs:WatermarkConfigs,container?:HTMLElement) {
         this.configs = {
             /**
              * The antd content layer zIndex is basically below 10
@@ -22,30 +24,49 @@ export class Watermark{
             inherit :true,
             ...configs
         }
+        this.container = container|| document.body
         this.watermarkMap = new Map()
+        this.debounced  = debounce( {delay:500},this.renderWatermark.bind(this))
         this.observer = new MutationObserver(this.onMutate.bind(this));
     }
-    debounced = debounce({ delay: 600 }, this.renderWatermark.bind(this))
 
-    private onMutate(mutationsList:MutationRecord[], observer){
-        debugger
-        const fixedStyle = {
-            position: 'relative',
-            overflow: 'hidden',
-        };
-        const mergedStyle = {
-            ...fixedStyle,
-            ...this.configs.style,
-        };
+    static create(configs:WatermarkConfigs,container?:HTMLElement):Watermark{
+        if (this.instance == null) {
+            this.instance = new Watermark(configs,container);
+        }else {
+            if(configs){
+                this.instance.configs = {
+                    ...this.instance.configs,
+                    ...configs
+                }
+            }
+            if(container){
+                this.instance.container = container
+            }
+        }
+
+        this.instance.renderWatermark()
+        return this.instance;
+    }
+    private onMutate(mutationsList:MutationRecord[]){
+        // const fixedStyle = {
+        //     position: 'relative',
+        //     overflow: 'hidden',
+        // };
+        // const mergedStyle = {
+        //     ...fixedStyle,
+        //     ...this.configs.style,
+        // };
         const isWatermarkEle = (ele: any) => Array.from(this.watermarkMap.values()).includes(ele);
         for (let mutation of mutationsList) {
 
             if (reRendering(mutation, isWatermarkEle)) {
-                console.log('reRendering...')
+                // console.log('reRendering...')
                 this.debounced(this.container,true);
             } else if (mutation.target === this.container && mutation.attributeName === 'style') {
-                // We've only force container not modify.
-                // Not consider nest case.
+                //TODO
+
+
                 // const keyStyles = Object.keys(fixedStyle);
                 //
                 // for (let i = 0; i < keyStyles.length; i += 1) {
@@ -60,9 +81,11 @@ export class Watermark{
             }
         }
     }
-    renderWatermark(container?:HTMLElement,reRender?:boolean){
-        this.container = container??document.body
-        this.removeWatermark(this.container)
+    renderWatermark(container?:HTMLElement){
+        if(container){
+            this.container = container
+        }
+        this.removeWatermark(this.container!)
         const {
             /**
              * The antd content layer zIndex is basically below 10
@@ -73,21 +96,21 @@ export class Watermark{
             content,
             font = {},
             gap = [100, 100],
-            offset,
+            // offset,
         } = this.configs;
         const {
-            color = 'rgba(0,0,0,0.2)',
-            fontSize = 16,
-            fontWeight = 'normal',
-            fontStyle = 'normal',
-            fontFamily = 'sans-serif',
-            textAlign = 'center',
+            color = FontStyle.Color,
+            fontSize = FontStyle.FontSize,
+            fontWeight = FontStyle.FontWeight,
+            fontStyle = FontStyle.FontStyle,
+            fontFamily = FontStyle.FontFamily,
+            textAlign = FontStyle.TextAlign,
         } = font;
         const [gapX , gapY ] = gap;
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        if (ctx) {
+        if (ctx && this.container) {
             const ratio = getPixelRatio();
             const [markWidth, markHeight] = getMarkSize(ctx,this.configs);
             const drawCanvas = (
@@ -111,7 +134,9 @@ export class Watermark{
                     gapY,
                 );
                 this.watermarkInfo = [nextClips, clipWidth]
+                // @ts-ignore
                 const watermarkEle = this.appendWatermark(this.watermarkInfo[0],this.watermarkInfo[1],this.container)
+                // @ts-ignore
                 this.observer.observe(this.container, { attributes: true, childList: true, subtree: true });
                 if(watermarkEle){
                     this.observer.observe(watermarkEle, { attributes: true, childList: true, subtree: true });
@@ -174,7 +199,6 @@ export class Watermark{
         if (watermarkEle &&  watermarkEle.parentNode) {
             watermarkEle.parentNode.removeChild(watermarkEle);
         }
-
         this.watermarkMap.delete(container);
         this.observer.disconnect();
     };

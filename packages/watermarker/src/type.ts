@@ -22,3 +22,11 @@ export type WatermarkConfigs = {
     inherit?: boolean;
 }
 export type WatermarkInfo = [base64: string, contentWidth: number]
+export enum FontStyle {
+    Color='rgba(0,0,0,0.1)',
+    FontSize=14,
+    FontWeight = 'normal',
+    FontStyle = 'normal',
+    FontFamily = 'sans-serif',
+    TextAlign = 'center'
+}
