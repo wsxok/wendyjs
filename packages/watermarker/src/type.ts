@@ -4,7 +4,7 @@ export type WatermarkConfigs = {
     width?: number;
     height?: number;
     image?: string;
-    content?: string | string[];
+    content?: string | string[]; // watermark text
     font?: {
         color?: CanvasFillStrokeStyles['fillStyle'];
         fontSize?: number | string;
@@ -12,7 +12,7 @@ export type WatermarkConfigs = {
         fontStyle?: 'none' | 'normal' | 'italic' | 'oblique';
         fontFamily?: string;
         textAlign?: CanvasTextAlign;
-    };
+    }; // watermark font
     style?: CSSStyleDeclaration;
     className?: string;
     rootClassName?: string;

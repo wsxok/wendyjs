@@ -7,15 +7,11 @@
 <body>
 <h1>My Parcel app</h1>
 
-<script type="module">
-    import {Watermark} from './src/index.ts'
-    const instance = new Watermark({content:['wangshixiao','13998801085']})
-    console.log(instance)
-    instance.renderWatermark()
-    const handlec = ()=>{
-        alert(1)
-    }
+<script src="dist/wendyjs-watermark.umd.js">
+
 </script>
-<button onclick="handlec()">1111</button>
+<script>
+    window.Watermark.create({content:['hahahahah']})
+</script>
 </body>
 </html>

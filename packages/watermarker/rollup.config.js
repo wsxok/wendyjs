@@ -4,19 +4,24 @@ import packageJson from "./package.json" assert { type: "json" };
 import terser from "@rollup/plugin-terser";
 import del from 'rollup-plugin-delete'
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-
+import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 
 
 console.log("🌶 rollup current mode: ", process.env.BUILD);
 
 const InjectPlugin = process.env.BUILD === 'production' ?
     [
-        terser(),
+
         nodeResolve({
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
             mainFields: ['browser', 'module', 'main'],
         }),
         typescript(),
+        getBabelOutputPlugin({
+            presets: ['@babel/preset-env'],
+            allowAllFormats: true,
+        }),
+        terser(),
         del({ targets: 'dist/*', verbose: true })
     ] :
     [
@@ -24,7 +29,7 @@ const InjectPlugin = process.env.BUILD === 'production' ?
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
             mainFields: ['browser', 'module', 'main'],
         }),
-        typescript(),
+        typescript()
     ]
 
 export default defineConfig({
@@ -43,6 +48,7 @@ export default defineConfig({
         {
             file: packageJson.module,
             format: "esm",
+            treeshake:'smallest'
         },
         {
             file: 'dist/wendyjs-watermark.umd.js',

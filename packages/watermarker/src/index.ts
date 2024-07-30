@@ -2,7 +2,7 @@ import {getMarkSize, getMarkStyle, getPixelRatio, getStyleStr, reRendering} from
 import useClips from "./useClips";
 import {WatermarkConfigs, WatermarkInfo,FontStyle} from "./type";
 import { debounce } from 'es-toolkit'
-export class Watermark{
+export default class Watermark{
     watermarkMap:Map<HTMLElement, HTMLDivElement>
     configs:WatermarkConfigs
     getClips = useClips();

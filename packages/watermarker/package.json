@@ -1,7 +1,7 @@
 {
   "name": "@wendyjs/watermarker",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "This is a framework-agnostic package that provides a Watermark class for managing watermarks on HTML elements. It includes features such as automatic re-rendering when mutations occur, customizable watermark styles",
   "source": "src/index.ts",
   "main": "dist/wendyjs-watermark.cjs",
@@ -37,6 +37,9 @@
     "radash": "^12.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.2",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
