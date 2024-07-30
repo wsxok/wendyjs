@@ -1,7 +1,7 @@
 {
   "name": "@wendyjs/watermark",
   "private": false,
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "This is a framework-agnostic package that provides a Watermark class for managing watermarks on HTML elements. It includes features such as automatic re-rendering when mutations occur, customizable watermark styles",
   "source": "src/index.ts",
   "main": "dist/wendyjs-watermark.cjs",
