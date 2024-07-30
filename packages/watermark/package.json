@@ -1,7 +1,7 @@
 {
-  "name": "@wendyjs/watermarker",
+  "name": "@wendyjs/watermark",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "This is a framework-agnostic package that provides a Watermark class for managing watermarks on HTML elements. It includes features such as automatic re-rendering when mutations occur, customizable watermark styles",
   "source": "src/index.ts",
   "main": "dist/wendyjs-watermark.cjs",
@@ -17,9 +17,9 @@
     "build": "rollup -c rollup.config.js  --environment BUILD:production"
   },
   "keywords": [
-    "watermarker",
-    "watermarker.js",
-    "watermarkerjs"
+    "watermark",
+    "watermark.js",
+    "watermark"
   ],
   "author": {
     "name": "shawnwang",
@@ -28,9 +28,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wsxok/wendyjs/tree/main/packages/watermarker"
+    "url": "https://github.com/wsxok/wendyjs/tree/main/packages/watermark"
   },
-  "homepage": "https://github.com/wsxok/wendyjs/tree/main/packages/watermarker#readme",
+  "homepage": "https://github.com/wsxok/wendyjs/tree/main/packages/watermark#readme",
   "license": "MIT",
   "dependencies": {
     "es-toolkit": "^1.13.1"

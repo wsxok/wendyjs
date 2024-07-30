@@ -1,12 +1,12 @@
 # @wendyjs/watermarker  
 ## Install  
 ```
-npm install @wendyjs/watermarker
+npm install @wendyjs/watermark
 ```
 ## Usage  
 ```javascript
-import {Watermarker} from '@wendyjs/watermarker'
-Watermarker.create({content:['wendyjs','hello world']})
+import {Watermark} from '@wendyjs/watermark'
+Watermark.create({content:['wendyjs','hello world']})
 ```
 ### Properties
 
