@@ -33,8 +33,7 @@
   "homepage": "https://github.com/wsxok/wendyjs/tree/main/packages/watermarker#readme",
   "license": "MIT",
   "dependencies": {
-    "es-toolkit": "^1.13.1",
-    "radash": "^12.1.0"
+    "es-toolkit": "^1.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
