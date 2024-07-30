@@ -6,7 +6,7 @@
   "source": "src/index.ts",
   "main": "dist/wendyjs-watermark.cjs",
   "module": "dist/wendyjs-watermark.mjs",
-  "types": "dist/types.d.ts",
+  "types": "dist/types",
   "type": "module",
   "files": [
     "dist"

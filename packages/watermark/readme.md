@@ -5,7 +5,7 @@ npm install @wendyjs/watermark
 ```
 ## Usage  
 ```javascript
-import {Watermark} from '@wendyjs/watermark'
+import Watermark from '@wendyjs/watermark'
 Watermark.create({content:['wendyjs','hello world']})
 ```
 ### Properties
